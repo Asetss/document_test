@@ -6,6 +6,7 @@ class DocumentManager
     private const OPERATION_TYPE_CHANGE_STATUS = 'change_status';
     private const OPERATION_TYPE_UPLOAD_DOC = 'upload_doc';
     private DocumentRepository $fileRepository;
+
     public function __construct(DocumentRepository $fileRepository)
     {
         $this->fileRepository = $fileRepository;

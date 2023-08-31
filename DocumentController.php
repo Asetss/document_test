@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 class DocumentController {
+
     private DocumentManager $documentManager;
+
     public function __construct(DocumentManager $documentManager)
     {
         $this->documentManager = $documentManager;
