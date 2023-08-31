@@ -13,7 +13,6 @@ class DocumentManager
     }
 
     /**
-     *  Фукнцию можно раскидать на сервис классы итд.
      *
      * @param string $uploadType
      * @param string$tmpFileName
@@ -21,10 +20,6 @@ class DocumentManager
      * @return bool
      */
     private function uploadDocument(string $uploadType, string $tmpFileName, int $userId): bool {
-        if (!$tmpFileName) {
-            throw new InvalidArgumentException('Не выбран тип ');
-        }
-
         // тут функция загрузки файла итд
         $fileContent = file_get_contents($tmpFileName);
 
@@ -43,15 +38,15 @@ class DocumentManager
         $privs['DOC_SEE_ALL'] = true;
 
         if ($this->request->get('operation') === self::OPERATION_TYPE_CHECK_ATTACH) {
-            $this->fileRepository->checkAttachment($_POST["el_id"], $_POST["actor_id"]);
+            $this->fileRepository->checkAttachment($request->get('el_id'), $request->get('actor_id'));
         }
 
         if($this->request->get('operation') === self::OPERATION_TYPE_CHANGE_STATUS && isset($_POST["status_id"])) {
-            $this->fileRepository->changeStatus($_POST["el_id"], $_POST["actor_id"], $_POST["status_id"]);
+            $this->fileRepository->changeStatus($request->get('el_id'), $request->get('actor_id'), $request->get('status_id'));
         }
 
-        if($this->request->get('operation') === self::OPERATION_TYPE_UPLOAD_DOC && isset($_FILES['upload_doc'], $_POST['upload_type'])) {
-            $this->uploadDocument($_POST['upload_type'], $_FILES['upload_doc']['tmp_name'], auth('us_id'));
+        if($this->request->get('operation') === self::OPERATION_TYPE_UPLOAD_DOC) {
+            $this->uploadDocument($request->get('upload_type'), $request->get('file'), Auth::user()->id);
        }
 
         return true;
