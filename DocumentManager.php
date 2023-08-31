@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 class DocumentManager
 {
     private const OPERATION_TYPE_CHECK_ATTACH = 'check_attach';
