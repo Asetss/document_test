@@ -41,7 +41,7 @@ class DocumentManager
             $this->fileRepository->checkAttachment($request->get('el_id'), $request->get('actor_id'));
         }
 
-        if($this->request->get('operation') === self::OPERATION_TYPE_CHANGE_STATUS && isset($_POST["status_id"])) {
+        if($this->request->get('operation') === self::OPERATION_TYPE_CHANGE_STATUS) {
             $this->fileRepository->changeStatus($request->get('el_id'), $request->get('actor_id'), $request->get('status_id'));
         }
 
